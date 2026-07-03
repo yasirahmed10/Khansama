@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #c9a84c;
+  --color-gold-light: #e6c97a;
+  --color-gold-dark: #9a7329;
+  --color-maroon: #6b1a1a;
+  --color-maroon-dark: #4a0e0e;
+  --color-dark: #0d0a08;
+  --color-dark-mid: #160f0a;
+  --color-dark-card: #1e1410;
+
+  --font-display: "Cinzel Decorative", serif;
+  --font-body: "Outfit", sans-serif;
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    font-family: var(--font-body);
+    background: var(--color-dark);
+    color: #f5ede0;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--color-dark); }
+  ::-webkit-scrollbar-thumb { background: var(--color-gold-dark); border-radius: 4px; }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .text-gold { color: var(--color-gold); }
+  .bg-dark { background: var(--color-dark); }
+  .bg-dark-mid { background: var(--color-dark-mid); }
+  .bg-dark-card { background: var(--color-dark-card); }
+  .border-gold { border-color: rgba(201,168,76,0.3); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+    color: var(--color-dark);
+    font-weight: 700;
+    padding: 0.75rem 1.75rem;
+    border-radius: 9999px;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+  .btn-outline {
+    border: 1px solid rgba(201,168,76,0.5);
+    color: var(--color-gold);
+    font-weight: 600;
+    padding: 0.75rem 1.75rem;
+    border-radius: 9999px;
+    transition: all 0.3s;
+    display: inline-block;
+    background: transparent;
+  }
+  .btn-outline:hover { background: rgba(201,168,76,0.1); transform: translateY(-2px); }
+  .card {
+    background: var(--color-dark-card);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 1rem;
+    transition: all 0.3s;
+  }
+  .card:hover { border-color: rgba(201,168,76,0.4); box-shadow: 0 0 30px rgba(201,168,76,0.1); }
+  .section-eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--color-gold);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.2;
+    color: #f5ede0;
+  }
+}

@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: khansama_db
+    restart: always
+    environment:
+      POSTGRES_DB: khansama_db
+      POSTGRES_USER: khansama
+      POSTGRES_PASSWORD: khansama123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: khansama_backend
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://khansama:khansama123@db:5432/khansama_db
+      - SECRET_KEY=khansama-super-secret-key-change-in-production
+      - DEBUG=True
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./backend/uploads:/app/uploads
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:alpine
+    container_name: khansama_nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./frontend/dist:/usr/share/nginx/html:ro
+      - ./backend/uploads:/usr/share/nginx/html/uploads:ro
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
