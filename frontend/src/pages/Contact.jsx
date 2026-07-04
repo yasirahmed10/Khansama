@@ -1,11 +1,16 @@
-﻿import React, { useState } from 'react';
-import { contactApi } from '../services/api';
+import React, { useState, useEffect } from 'react';
+import { contactApi, settingsApi } from '../services/api';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const ContactPage = () => {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
   const [loading, setLoading] = useState(false);
+  const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    settingsApi.restaurant().then(({ data }) => setSettings(data)).catch(() => {});
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -52,7 +57,7 @@ const ContactPage = () => {
               <div className="bg-dark-card border border-gold/15 p-6 rounded-2xl">
                 <Mail className="w-6 h-6 text-gold mb-3" />
                 <h4 className="font-semibold text-sm text-white mb-1">Email Address</h4>
-                <p className="text-xs text-gray-400 leading-relaxed">orders@khansama.com<br />info@khansama.com</p>
+                <p className="text-xs text-gray-400 leading-relaxed">{settings?.email || 'orders@khansama.com'}</p>
               </div>
               <div className="bg-dark-card border border-gold/15 p-6 rounded-2xl">
                 <Clock className="w-6 h-6 text-gold mb-3" />

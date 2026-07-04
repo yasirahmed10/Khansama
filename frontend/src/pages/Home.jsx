@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
@@ -256,7 +256,7 @@ const Home = () => {
               </div>
               <div className="flex gap-4 items-center">
                 <span className="text-gold text-lg">✉️</span>
-                <p className="text-sm text-gray-300">orders@khansama.com</p>
+                <p className="text-sm text-gray-300">{restaurant?.email || 'orders@khansama.com'}</p>
               </div>
             </div>
             <div className="flex gap-4 mt-4">

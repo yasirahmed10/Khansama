@@ -1,4 +1,4 @@
-﻿import os, uuid, shutil
+import os, uuid, shutil
 from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -76,7 +76,28 @@ app.include_router(newsletter.router,    prefix="/api/newsletter",   tags=["News
 async def startup():
     Base.metadata.create_all(bind=engine)
     await seed_defaults()
+    await patch_settings()
     await seed_gallery_images()
+
+async def patch_settings():
+    """One-time patch to fix any stale values in existing RestaurantSettings rows."""
+    from backend.database.connection import SessionLocal
+    db = SessionLocal()
+    try:
+        row = db.query(RestaurantSettings).first()
+        if row:
+            changed = False
+            if row.email in ("khansama@bhopal.com", "info@khansama.com", None):
+                row.email = "orders@khansama.com"
+                changed = True
+            if changed:
+                db.commit()
+                print("✅ RestaurantSettings patched on startup.")
+    except Exception as e:
+        db.rollback()
+        print(f"⚠️  patch_settings error: {e}")
+    finally:
+        db.close()
 
 async def seed_defaults():
     from backend.database.connection import SessionLocal
@@ -98,7 +119,7 @@ async def seed_defaults():
                 tagline="Where Royal Mughal Flavours Meet Modern Cravings",
                 address="Ahmedabad Palace Rd, Kohefiza, Bhopal, MP 462001",
                 phone="078289 98497",
-                email="khansama@bhopal.com",
+                email="orders@khansama.com",
                 opening_hours={"everyday": "6:00 PM - 2:00 AM"},
                 social_links={},
                 delivery_charge=30.0,

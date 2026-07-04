@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
 import { settingsApi, newsletterApi } from '../services/api';
@@ -40,9 +40,15 @@ const Footer = () => {
             {settings?.tagline || "Where Royal Mughal Flavours Meet Modern Cravings"}
           </p>
           <div className="flex gap-4 mt-2">
-            <a href={settings?.social_links?.facebook || 'https://www.facebook.com/'} target="_blank" rel="noopener noreferrer" className="p-2 bg-dark-card border border-gold/20 hover:border-gold text-gray-400 hover:text-gold rounded-full transition"><Facebook className="w-4 h-4" /></a>
-            <a href={settings?.social_links?.instagram || 'https://www.instagram.com/'} target="_blank" rel="noopener noreferrer" className="p-2 bg-dark-card border border-gold/20 hover:border-gold text-gray-400 hover:text-gold rounded-full transition"><Instagram className="w-4 h-4" /></a>
-            <a href={settings?.social_links?.twitter || 'https://twitter.com/'} target="_blank" rel="noopener noreferrer" className="p-2 bg-dark-card border border-gold/20 hover:border-gold text-gray-400 hover:text-gold rounded-full transition"><Twitter className="w-4 h-4" /></a>
+            {settings?.social_links?.facebook && (
+              <a href={settings.social_links.facebook} target="_blank" rel="noopener noreferrer" className="p-2 bg-dark-card border border-gold/20 hover:border-gold text-gray-400 hover:text-gold rounded-full transition"><Facebook className="w-4 h-4" /></a>
+            )}
+            {settings?.social_links?.instagram && (
+              <a href={settings.social_links.instagram} target="_blank" rel="noopener noreferrer" className="p-2 bg-dark-card border border-gold/20 hover:border-gold text-gray-400 hover:text-gold rounded-full transition"><Instagram className="w-4 h-4" /></a>
+            )}
+            {settings?.social_links?.twitter && (
+              <a href={settings.social_links.twitter} target="_blank" rel="noopener noreferrer" className="p-2 bg-dark-card border border-gold/20 hover:border-gold text-gray-400 hover:text-gold rounded-full transition"><Twitter className="w-4 h-4" /></a>
+            )}
           </div>
         </div>
 
@@ -71,7 +77,7 @@ const Footer = () => {
             </li>
             <li className="flex gap-2 items-center">
               <Mail className="w-4 h-4 text-gold" />
-              <span>{settings?.email || "info@khansama.com"}</span>
+              <span>{settings?.email || 'orders@khansama.com'}</span>
             </li>
             <li className="flex gap-2 items-center">
               <Clock className="w-4 h-4 text-gold" />
