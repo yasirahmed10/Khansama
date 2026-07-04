@@ -127,41 +127,91 @@ async def seed_gallery_images():
     from backend.database.connection import SessionLocal
     from backend.models import Category, Food, FoodImage
 
+    # Per-dish-name image mapping
+    DISH_IMAGES = {
+        # Shawarma
+        "Authentic Shawarma":           "/uploads/gallery/shawarma.png",
+        "Open Shawarma":                "/uploads/gallery/shawarma.png",
+        "Butter Chicken Shawarma":      "/uploads/gallery/shawarma.png",
+        "Tandoori Shawarma":            "/uploads/gallery/tandoori_shawarma.png",
+        "Khansama Special Shawarma":    "/uploads/gallery/tandoori_shawarma.png",
+        # Steamed
+        "Steam Chicken with Saute Veggies": "/uploads/gallery/steamed_chicken.png",
+        "Steam Fish with Saute Veggies":    "/uploads/gallery/steamed_fish.png",
+        # Main Course
+        "Khansama Special Butter Chicken":  "/uploads/gallery/butter_chicken.png",
+        "Chicken Hydrabadi Green Korma":    "/uploads/gallery/green_korma.png",
+        "Creamy Pepper Chicken":            "/uploads/gallery/pepper_chicken.png",
+        "Tawa Fish Fry Gravy":              "/uploads/gallery/fish_fry.png",
+        # Tawa Chatkhara
+        "Tawa Chicken Rice":                "/uploads/gallery/tawa_rice.png",
+        "Tawa Chicken and Egg Rice":        "/uploads/gallery/egg_rice.png",
+        "Tawa Fish Rice":                   "/uploads/gallery/fish_fry.png",
+        "Tawa Chicken and Fish Rice":       "/uploads/gallery/egg_rice.png",
+        "Butter Chicken Rice":              "/uploads/gallery/tawa_rice.png",
+        "Plain Rice":                       "/uploads/gallery/plain_rice.png",
+        # Sandwiches
+        "Chicken Kulcha Sandwich":          "/uploads/gallery/kulcha_sandwich.png",
+        "Stuffed Chicken Garlic Bread":     "/uploads/gallery/stuffed_garlic_bread.png",
+        # Grilled
+        "Grilled Chicken with Saute Veggies": "/uploads/gallery/grilled_chicken.png",
+        "Grilled Fish with Saute Veggies":    "/uploads/gallery/grilled_fish.png",
+        # Breads
+        "Kulcha":       "/uploads/gallery/bread.png",
+        "Tawa Roti":    "/uploads/gallery/bread.png",
+        "Butter Roti":  "/uploads/gallery/bread.png",
+        "Pita Bread":   "/uploads/gallery/bread.png",
+        "Garlic Bread": "/uploads/gallery/garlic_bread.png",
+        # Non Fried Chinese
+        "Chilli Chicken":  "/uploads/gallery/chilli_chicken.png",
+        "Dragon Chicken":  "/uploads/gallery/dragon_chicken.png",
+        # Combos
+        "Creamy Pepper Chicken with Garlic Bread": "/uploads/gallery/combo_plate.png",
+        "Butter Chicken with Zeera Rice":          "/uploads/gallery/combo_plate.png",
+        "Butter Chicken with Kulcha":              "/uploads/gallery/combo_plate.png",
+        "Grilled Chicken with Rice":               "/uploads/gallery/combo_plate.png",
+        "Grilled Fish with Rice":                  "/uploads/gallery/combo_plate.png",
+    }
+
+    # Category fallback images
     CATEGORY_IMAGES = {
-        "Shawarma":         "/uploads/gallery/shawarma.png",
-        "Steamed":          "/uploads/gallery/steamed.png",
-        "Main Course":      "/uploads/gallery/butter_chicken.png",
-        "Tawa Chatkhara":   "/uploads/gallery/tawa_rice.png",
-        "Sandwiches":       "/uploads/gallery/sandwich.png",
-        "Grilled":          "/uploads/gallery/steamed.png",
-        "Breads":           "/uploads/gallery/bread.png",
-        "Non Fried Chinese":"/uploads/gallery/tawa_rice.png",
-        "Combos":           "/uploads/gallery/biryani.png",
+        "Shawarma":          "/uploads/gallery/shawarma.png",
+        "Steamed":           "/uploads/gallery/steamed_chicken.png",
+        "Main Course":       "/uploads/gallery/butter_chicken.png",
+        "Tawa Chatkhara":    "/uploads/gallery/tawa_rice.png",
+        "Sandwiches":        "/uploads/gallery/kulcha_sandwich.png",
+        "Grilled":           "/uploads/gallery/grilled_chicken.png",
+        "Breads":            "/uploads/gallery/bread.png",
+        "Non Fried Chinese": "/uploads/gallery/chilli_chicken.png",
+        "Combos":            "/uploads/gallery/combo_plate.png",
     }
     DEFAULT_IMG = "/uploads/gallery/butter_chicken.png"
 
     db = SessionLocal()
     try:
-        # Fix category image_url — only update rows that don't already use gallery paths
+        # Fix category image_url
         for cat in db.query(Category).all():
             img = CATEGORY_IMAGES.get(cat.name, DEFAULT_IMG)
             if cat.image_url != img:
                 cat.image_url = img
 
-        # Fix food images — reset any that point to non-gallery paths (ephemeral uploads)
+        # Fix food images — per-dish name mapping
         foods = db.query(Food).all()
         for food in foods:
             cat_name = food.category.name if food.category else "Main Course"
-            gallery_url = CATEGORY_IMAGES.get(cat_name, DEFAULT_IMG)
-            # Check if primary image is broken (not a gallery path)
+            target_url = DISH_IMAGES.get(food.name) or CATEGORY_IMAGES.get(cat_name, DEFAULT_IMG)
+
             primary = next((i for i in food.images if i.is_primary), None)
             if primary is None:
-                db.add(FoodImage(food_id=food.id, image_url=gallery_url, is_primary=True, display_order=1))
+                db.add(FoodImage(food_id=food.id, image_url=target_url, is_primary=True, display_order=1))
             elif not primary.image_url.startswith("/uploads/gallery/"):
-                primary.image_url = gallery_url
+                primary.image_url = target_url
+            elif primary.image_url != target_url:
+                # Update to the correct per-dish image
+                primary.image_url = target_url
 
         db.commit()
-        print("✅ Gallery images seeded/fixed on startup.")
+        print("✅ Per-dish gallery images seeded/fixed on startup.")
     except Exception as e:
         db.rollback()
         print(f"⚠️  seed_gallery_images error: {e}")
