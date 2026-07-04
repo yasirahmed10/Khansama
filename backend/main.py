@@ -76,6 +76,7 @@ app.include_router(newsletter.router,    prefix="/api/newsletter",   tags=["News
 async def startup():
     Base.metadata.create_all(bind=engine)
     await seed_defaults()
+    await seed_gallery_images()
 
 async def seed_defaults():
     from backend.database.connection import SessionLocal
@@ -117,6 +118,53 @@ async def seed_defaults():
             ))
 
         db.commit()
+    finally:
+        db.close()
+
+async def seed_gallery_images():
+    """Fix all category & food image URLs to use committed gallery images.
+    Runs on every startup so Render's ephemeral filesystem wipes don't break images."""
+    from backend.database.connection import SessionLocal
+    from backend.models import Category, Food, FoodImage
+
+    CATEGORY_IMAGES = {
+        "Shawarma":         "/uploads/gallery/shawarma.png",
+        "Steamed":          "/uploads/gallery/steamed.png",
+        "Main Course":      "/uploads/gallery/butter_chicken.png",
+        "Tawa Chatkhara":   "/uploads/gallery/tawa_rice.png",
+        "Sandwiches":       "/uploads/gallery/sandwich.png",
+        "Grilled":          "/uploads/gallery/steamed.png",
+        "Breads":           "/uploads/gallery/bread.png",
+        "Non Fried Chinese":"/uploads/gallery/tawa_rice.png",
+        "Combos":           "/uploads/gallery/biryani.png",
+    }
+    DEFAULT_IMG = "/uploads/gallery/butter_chicken.png"
+
+    db = SessionLocal()
+    try:
+        # Fix category image_url — only update rows that don't already use gallery paths
+        for cat in db.query(Category).all():
+            img = CATEGORY_IMAGES.get(cat.name, DEFAULT_IMG)
+            if cat.image_url != img:
+                cat.image_url = img
+
+        # Fix food images — reset any that point to non-gallery paths (ephemeral uploads)
+        foods = db.query(Food).all()
+        for food in foods:
+            cat_name = food.category.name if food.category else "Main Course"
+            gallery_url = CATEGORY_IMAGES.get(cat_name, DEFAULT_IMG)
+            # Check if primary image is broken (not a gallery path)
+            primary = next((i for i in food.images if i.is_primary), None)
+            if primary is None:
+                db.add(FoodImage(food_id=food.id, image_url=gallery_url, is_primary=True, display_order=1))
+            elif not primary.image_url.startswith("/uploads/gallery/"):
+                primary.image_url = gallery_url
+
+        db.commit()
+        print("✅ Gallery images seeded/fixed on startup.")
+    except Exception as e:
+        db.rollback()
+        print(f"⚠️  seed_gallery_images error: {e}")
     finally:
         db.close()
 
