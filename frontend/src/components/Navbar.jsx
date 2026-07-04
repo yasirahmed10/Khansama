@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, ShoppingCart, User as UserIcon, Phone, MapPin, Calendar, Clock, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
@@ -26,7 +26,7 @@ const Navbar = ({ onCartClick }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const logoUrl = restaurantSettings?.logo_url || '/uploads/gallery/logo.png'; // Fallback if logo upload exists later
+  const logoUrl = restaurantSettings?.logo_url || '/assets/gallery/logo.png'; // Fallback if logo upload exists later
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-350 ${scrolled ? 'bg-dark/95 backdrop-blur-md border-b border-gold/20 shadow-lg' : 'bg-transparent'}`}>
@@ -34,7 +34,7 @@ const Navbar = ({ onCartClick }) => {
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full border border-gold/40 shadow-[0_0_12px_rgba(201,168,76,0.3)] overflow-hidden bg-dark-card flex items-center justify-center">
-              <img src="/uploads/gallery/logo.png" alt="Khansama Logo" className="w-full h-full object-cover rounded-full" />
+              <img src="/assets/gallery/logo.png" alt="Khansama Logo" className="w-full h-full object-cover rounded-full" />
             </div>
             <div className="flex flex-col">
               <span className="font-display text-gold tracking-widest text-sm font-bold uppercase">Khansama</span>

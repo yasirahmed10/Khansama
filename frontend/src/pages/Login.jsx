@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -56,7 +56,7 @@ const LoginPage = () => {
       <div className="bg-dark-card border border-gold/15 p-8 rounded-2xl max-w-md w-full shadow-2xl">
         <div className="text-center mb-8">
           <div className="w-12 h-12 rounded-full border border-gold/40 overflow-hidden flex items-center justify-center bg-dark mx-auto mb-3">
-            <img src="/uploads/gallery/logo.png" alt="Khansama Logo" className="w-full h-full object-cover rounded-full" />
+            <img src="/assets/gallery/logo.png" alt="Khansama Logo" className="w-full h-full object-cover rounded-full" />
           </div>
           <h2 className="font-display text-gold text-lg font-bold uppercase tracking-wider">
             {isRegister ? 'Create Account' : 'Welcome Back'}

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Utensils, FolderHeart, ShoppingBag, CalendarRange, Settings, Image, MessageSquare, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';

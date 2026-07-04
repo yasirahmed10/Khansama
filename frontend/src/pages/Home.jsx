@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
@@ -29,14 +29,14 @@ const Home = () => {
     {
       title: "Royal Mughal Flavours",
       subtitle: "Experience Bhopal's legendary night kitchen serving authentic recipes since inception.",
-      image: "/uploads/gallery/hero.png",
+      image: "/assets/gallery/hero.png",
       ctaText: "Order Late Night",
       ctaUrl: "/menu"
     },
     {
       title: "Creamy Butter Chicken",
       subtitle: "Slow-cooked tandoori chicken simmered in rich cream, tomato paste, and fenugreek.",
-      image: "/uploads/gallery/butter_chicken.png",
+      image: "/assets/gallery/butter_chicken.png",
       ctaText: "Order Bestseller",
       ctaUrl: "/menu"
     }
@@ -98,7 +98,7 @@ const Home = () => {
                 className="bg-dark-card border border-gold/10 rounded-xl p-4 flex flex-col items-center justify-center text-center cursor-pointer hover:border-gold/50 hover:shadow-[0_0_15px_rgba(201,168,76,0.1)] transition"
               >
                 <div className="w-16 h-16 rounded-full overflow-hidden bg-dark mb-3 flex items-center justify-center border border-gold/15">
-                  <img src={cat.image_url || '/uploads/gallery/placeholder.png'} alt={cat.name} className="w-full h-full object-cover" />
+                  <img src={cat.image_url || '/assets/gallery/placeholder.png'} alt={cat.name} className="w-full h-full object-cover" />
                 </div>
                 <h4 className="text-sm font-semibold text-white tracking-wide">{cat.name}</h4>
               </div>
@@ -132,7 +132,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="relative">
             <div className="absolute inset-0 border border-gold/20 rounded-2xl transform translate-x-4 translate-y-4 -z-10"></div>
-            <img src="/uploads/gallery/hero.png" alt="Khansama Kitchen" className="w-full h-[400px] object-cover rounded-2xl border border-gold/30 shadow-2xl" />
+            <img src="/assets/gallery/hero.png" alt="Khansama Kitchen" className="w-full h-[400px] object-cover rounded-2xl border border-gold/30 shadow-2xl" />
             <div className="absolute -bottom-6 -right-6 bg-gold text-dark p-6 rounded-2xl hidden sm:block shadow-xl max-w-xs">
               <span className="font-display font-extrabold text-3xl">4.6 ★</span>
               <p className="text-xs font-bold uppercase tracking-wider mt-1 text-dark/80">Top Rated Late Night Fast Food Outlet in Bhopal</p>
@@ -225,7 +225,7 @@ const Home = () => {
       {/* ── RESERVATION CTA ── */}
       <section className="relative py-24 bg-dark flex items-center">
         <div className="absolute inset-0 bg-black/75 z-10"></div>
-        <img src="/uploads/gallery/hero.png" alt="Table Booking Background" className="absolute inset-0 w-full h-full object-cover" />
+        <img src="/assets/gallery/hero.png" alt="Table Booking Background" className="absolute inset-0 w-full h-full object-cover" />
         <div className="relative z-20 max-w-4xl mx-auto px-4 text-center">
           <p className="section-eyebrow">Dine In Style</p>
           <h2 className="font-display text-gold text-3xl sm:text-5xl font-extrabold uppercase mt-2 mb-6">Secure Your Royal Seat</h2>

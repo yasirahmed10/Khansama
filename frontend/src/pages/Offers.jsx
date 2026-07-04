@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { offersApi } from '../services/api';
 import { Sparkles, Calendar, Receipt, Gift } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -57,7 +57,7 @@ const OffersPage = () => {
             offers.map(off => (
               <div key={off.id} className="bg-dark-card border border-gold/15 rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-xl">
                 <div className="h-44 md:h-auto md:w-2/5 relative">
-                  <img src={off.banner_url || '/uploads/gallery/butter_chicken.png'} alt={off.title} className="w-full h-full object-cover" />
+                  <img src={off.banner_url || '/assets/gallery/butter_chicken.png'} alt={off.title} className="w-full h-full object-cover" />
                 </div>
                 <div className="p-6 md:w-3/5 flex flex-col justify-between">
                   <div>

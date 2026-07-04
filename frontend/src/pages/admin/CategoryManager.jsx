@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { categoriesApi } from '../../services/api';
 import AdminSidebar from '../../components/AdminSidebar';
 import { Plus, Edit2, Trash2, X } from 'lucide-react';
@@ -106,7 +106,7 @@ const CategoryManager = () => {
               <div key={cat.id} className="bg-dark-card border border-gold/15 p-5 rounded-2xl flex flex-col justify-between shadow-xl">
                 <div>
                   <div className="flex justify-between items-start mb-4">
-                    <img src={cat.image_url || '/uploads/gallery/placeholder.png'} alt={cat.name} className="w-12 h-12 rounded-lg object-cover border border-gold/20" />
+                    <img src={cat.image_url || '/assets/gallery/placeholder.png'} alt={cat.name} className="w-12 h-12 rounded-lg object-cover border border-gold/20" />
                     <span className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase ${cat.is_active ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/35' : 'bg-red-500/10 text-red-400 border border-red-500/35'}`}>
                       {cat.is_active ? 'Active' : 'Inactive'}
                     </span>

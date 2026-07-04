@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { foodsApi, categoriesApi, mediaApi } from '../../services/api';
 import AdminSidebar from '../../components/AdminSidebar';
 import { Plus, Edit2, Trash2, X, Upload } from 'lucide-react';
@@ -186,7 +186,7 @@ const FoodManager = () => {
                 {foods.map(food => (
                   <tr key={food.id} className="hover:bg-dark/30 transition">
                     <td className="p-4">
-                      <img src={food.primary_image || '/uploads/gallery/butter_chicken.png'} alt={food.name} className="w-12 h-12 rounded-lg object-cover border border-gold/20" />
+                      <img src={food.primary_image || '/assets/gallery/butter_chicken.png'} alt={food.name} className="w-12 h-12 rounded-lg object-cover border border-gold/20" />
                     </td>
                     <td className="p-4 font-semibold text-white">{food.name}</td>
                     <td className="p-4">{food.category?.name}</td>
@@ -259,7 +259,7 @@ const FoodManager = () => {
                   <div className="flex flex-col gap-1">
                     <label className="text-[10px] text-gray-400 uppercase font-semibold">Primary Image</label>
                     <div className="flex items-center gap-2">
-                      <input type="text" value={primaryImage} onChange={(e) => setPrimaryImage(e.target.value)} className="flex-1 bg-dark border border-gold/25 rounded-lg px-3.5 py-2 text-xs text-white focus:outline-none focus:border-gold transition" placeholder="/uploads/gallery/butter_chicken.png" />
+                      <input type="text" value={primaryImage} onChange={(e) => setPrimaryImage(e.target.value)} className="flex-1 bg-dark border border-gold/25 rounded-lg px-3.5 py-2 text-xs text-white focus:outline-none focus:border-gold transition" placeholder="/assets/gallery/butter_chicken.png" />
                       <label className={`cursor-pointer bg-dark-card border border-gold/30 hover:bg-gold/10 text-gold px-3 py-2 rounded-lg transition flex items-center gap-1 text-xs ${uploadingImage ? 'opacity-50 cursor-not-allowed' : ''}`}>
                         {uploadingImage ? <span className="animate-pulse">...</span> : <Upload className="w-3.5 h-3.5" />}
                         <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} disabled={uploadingImage} />

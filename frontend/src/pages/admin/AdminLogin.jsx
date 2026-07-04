@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -28,7 +28,7 @@ const AdminLogin = () => {
       <div className="bg-dark-card border border-gold/15 p-8 rounded-2xl max-w-sm w-full shadow-2xl">
         <div className="text-center mb-8">
           <div className="w-12 h-12 rounded-full border border-gold/40 overflow-hidden flex items-center justify-center bg-dark mx-auto mb-3">
-            <img src="/uploads/gallery/logo.png" alt="Khansama Logo" className="w-full h-full object-cover rounded-full" />
+            <img src="/assets/gallery/logo.png" alt="Khansama Logo" className="w-full h-full object-cover rounded-full" />
           </div>
           <h2 className="font-display text-gold text-base font-bold uppercase tracking-wider">Admin Portal</h2>
           <p className="text-[10px] text-gray-500 mt-1 uppercase tracking-wider">Khansama of Bhopal</p>

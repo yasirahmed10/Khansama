@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Award, ShieldCheck, Heart, Coffee } from 'lucide-react';
 
 const AboutPage = () => {
@@ -24,7 +24,7 @@ const AboutPage = () => {
             </p>
           </div>
           <div className="h-[340px] rounded-2xl overflow-hidden border border-gold/20 shadow-xl">
-            <img src="/uploads/gallery/hero.png" alt="Khansama food preparation" className="w-full h-full object-cover" />
+            <img src="/assets/gallery/hero.png" alt="Khansama food preparation" className="w-full h-full object-cover" />
           </div>
         </div>
 

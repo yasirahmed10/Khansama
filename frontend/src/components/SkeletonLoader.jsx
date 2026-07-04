@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 export const CardSkeleton = () => (
   <div className="bg-dark-card border border-gold/10 rounded-2xl h-80 animate-pulse flex flex-col">

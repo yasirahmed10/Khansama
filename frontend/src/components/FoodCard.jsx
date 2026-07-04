@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { ShoppingCart, Flame, Eye } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -30,7 +30,7 @@ const FoodCard = ({ food }) => {
       {/* Food Image Container */}
       <div className="relative h-48 overflow-hidden bg-dark flex items-center justify-center">
         <img 
-          src={food.primary_image || '/uploads/gallery/butter_chicken.png'} 
+          src={food.primary_image || '/assets/gallery/butter_chicken.png'} 
           alt={food.name} 
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
         />

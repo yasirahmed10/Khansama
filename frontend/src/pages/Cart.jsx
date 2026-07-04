@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { ordersApi } from '../services/api';
 import { useNavigate } from 'react-router-dom';
@@ -107,7 +107,7 @@ const CartPage = () => {
                 const price = isDiscount ? item.price * (1 - item.discount_percent / 100) : item.price;
                 return (
                   <div key={item.id} className="flex gap-4 pt-4 first:pt-0 items-center justify-between">
-                    <img src={item.primary_image || '/uploads/gallery/butter_chicken.png'} alt={item.name} className="w-14 h-14 rounded-lg object-cover" />
+                    <img src={item.primary_image || '/assets/gallery/butter_chicken.png'} alt={item.name} className="w-14 h-14 rounded-lg object-cover" />
                     <div className="flex-1 min-w-0">
                       <h4 className="font-semibold text-sm text-white line-clamp-1">{item.name}</h4>
                       <p className="text-xs text-gray-400 mt-0.5">{item.category?.name}</p>

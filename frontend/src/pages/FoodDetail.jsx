@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { foodsApi } from '../services/api';
 import { useCart } from '../context/CartContext';
@@ -71,7 +71,7 @@ const FoodDetail = () => {
           <div className="bg-dark-card border border-gold/15 rounded-2xl overflow-hidden shadow-xl">
             <div className="h-[400px] w-full relative">
               <img 
-                src={food.primary_image || '/uploads/gallery/butter_chicken.png'} 
+                src={food.primary_image || '/assets/gallery/butter_chicken.png'} 
                 alt={food.name} 
                 className="w-full h-full object-cover" 
               />
@@ -160,7 +160,7 @@ const FoodDetail = () => {
               {related.map(item => (
                 <div key={item.id} className="bg-dark-card border border-gold/10 rounded-xl overflow-hidden group">
                   <div className="h-40 overflow-hidden relative">
-                    <img src={item.primary_image || '/uploads/gallery/butter_chicken.png'} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                    <img src={item.primary_image || '/assets/gallery/butter_chicken.png'} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
                   </div>
                   <div className="p-4 flex flex-col justify-between h-32">
                     <h4 className="font-semibold text-sm text-white group-hover:text-gold transition line-clamp-1">{item.name}</h4>

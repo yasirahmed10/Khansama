@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
 import { settingsApi, newsletterApi } from '../services/api';
@@ -32,7 +32,7 @@ const Footer = () => {
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full border border-gold/40 overflow-hidden flex items-center justify-center bg-dark-card">
-              <img src="/uploads/gallery/logo.png" alt="Khansama Logo" className="w-full h-full object-cover rounded-full" />
+              <img src="/assets/gallery/logo.png" alt="Khansama Logo" className="w-full h-full object-cover rounded-full" />
             </div>
             <span className="font-display text-gold tracking-widest text-lg font-bold uppercase">Khansama</span>
           </div>
@@ -40,9 +40,9 @@ const Footer = () => {
             {settings?.tagline || "Where Royal Mughal Flavours Meet Modern Cravings"}
           </p>
           <div className="flex gap-4 mt-2">
-            <a href="#" className="p-2 bg-dark-card border border-gold/20 hover:border-gold text-gray-400 hover:text-gold rounded-full transition"><Facebook className="w-4 h-4" /></a>
-            <a href="#" className="p-2 bg-dark-card border border-gold/20 hover:border-gold text-gray-400 hover:text-gold rounded-full transition"><Instagram className="w-4 h-4" /></a>
-            <a href="#" className="p-2 bg-dark-card border border-gold/20 hover:border-gold text-gray-400 hover:text-gold rounded-full transition"><Twitter className="w-4 h-4" /></a>
+            <a href={settings?.social_links?.facebook || 'https://www.facebook.com/'} target="_blank" rel="noopener noreferrer" className="p-2 bg-dark-card border border-gold/20 hover:border-gold text-gray-400 hover:text-gold rounded-full transition"><Facebook className="w-4 h-4" /></a>
+            <a href={settings?.social_links?.instagram || 'https://www.instagram.com/'} target="_blank" rel="noopener noreferrer" className="p-2 bg-dark-card border border-gold/20 hover:border-gold text-gray-400 hover:text-gold rounded-full transition"><Instagram className="w-4 h-4" /></a>
+            <a href={settings?.social_links?.twitter || 'https://twitter.com/'} target="_blank" rel="noopener noreferrer" className="p-2 bg-dark-card border border-gold/20 hover:border-gold text-gray-400 hover:text-gold rounded-full transition"><Twitter className="w-4 h-4" /></a>
           </div>
         </div>
 
@@ -104,8 +104,8 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-gold/10 text-center text-xs text-gray-500 flex flex-col sm:flex-row justify-between items-center gap-4">
         <span>© {new Date().getFullYear()} Khansama of Bhopal. All Rights Reserved.</span>
         <div className="flex gap-6">
-          <Link to="/privacy" className="hover:text-gold transition">Privacy Policy</Link>
-          <Link to="/terms" className="hover:text-gold transition">Terms & Conditions</Link>
+          <Link to="/about" className="hover:text-gold transition">About Us</Link>
+          <Link to="/contact" className="hover:text-gold transition">Contact</Link>
         </div>
       </div>
     </footer>

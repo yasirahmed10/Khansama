@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { X, Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
@@ -45,7 +45,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
                 return (
                   <div key={item.id} className="flex gap-4 p-3 bg-dark-card border border-gold/10 rounded-xl relative group">
                     <img 
-                      src={item.primary_image || '/uploads/gallery/butter_chicken.png'} 
+                      src={item.primary_image || '/assets/gallery/butter_chicken.png'} 
                       alt={item.name} 
                       className="w-16 h-16 rounded-lg object-cover" 
                     />
